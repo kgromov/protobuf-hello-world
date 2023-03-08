@@ -1,0 +1,12 @@
+syntax = "proto3";
+option java_multiple_files = true;
+package com.kgromov.protobuf.demo;
+
+message HelloWorldRequest {
+  string requestId = 1;
+  string message = 2;
+}
+
+message HelloWorldResponse {
+  string status = 1;
+}
