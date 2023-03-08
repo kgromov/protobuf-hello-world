@@ -12,7 +12,6 @@
     <properties>
         <java.version>17</java.version>
         <protobuf.version>3.22.0</protobuf.version>
-        <!--        <protoc.binary>${env.PROTOC}</protoc.binary>-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
@@ -39,4 +38,37 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.xolstice.maven.plugins</groupId>
+                <artifactId>protobuf-maven-plugin</artifactId>
+                <version>0.6.1</version>
+                <configuration>
+                    <protocExecutable>${env.PROTOC}\protoc.exe</protocExecutable>
+                    <additionalProtoPathElements>
+                        <additionalProtoPathElement>${project.basedir}/src/main/resources</additionalProtoPathElement>
+                    </additionalProtoPathElements>
+                    <protoSourceRoot>${project.basedir}/src/main/resources</protoSourceRoot>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>test-compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
